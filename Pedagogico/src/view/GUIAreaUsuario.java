@@ -6,7 +6,8 @@ import javax.swing.event.InternalFrameListener;
 public class GUIAreaUsuario extends javax.swing.JFrame implements InternalFrameListener{
     public static String user;
     private boolean flagCadCurso = false, flagCadMod = false, flagCadUc = false, flagCadTurma = false,
-            flagCadAluno = false, flagCadProf = false, flagCadProfUc = false, flagGUICadAlunoTurma = false;
+            flagCadAluno = false, flagCadProf = false, flagCadProfUc = false, flagGUICadAlunoTurma = false,
+            flagcadcron = false, flagvercron = false, flagFeriado = false, flagIncidente = false;
 
     public GUIAreaUsuario() {
         initComponents();
@@ -33,7 +34,6 @@ public class GUIAreaUsuario extends javax.swing.JFrame implements InternalFrameL
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jbtnClose.setBackground(new java.awt.Color(255, 0, 0));
-        jbtnClose.setForeground(new java.awt.Color(0, 0, 0));
         jbtnClose.setText("X");
         jbtnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -54,7 +54,7 @@ public class GUIAreaUsuario extends javax.swing.JFrame implements InternalFrameL
                 .addComponent(jbtnClose))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 790, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1274, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -70,7 +70,7 @@ public class GUIAreaUsuario extends javax.swing.JFrame implements InternalFrameL
         jlOpcoes.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jlOpcoes.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jlOpcoes.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Cadastrar Curso", "Cadastrar Modulo", " ", "Cadastrar UC", "Cad. Prof. UC", " ", "Cadastrar Turma", "Cad. Aluno Turma", " ", "Cadastrar Aluno", "Cadastrar Professor", " ", "Criar Cronograma", "Ver Cronograma" };
+            String[] strings = { "Cadastrar Curso", "Cadastrar Modulo", " ", "Cadastrar UC", "Cad. Prof. UC", " ", "Cadastrar Turma", "Cad. Aluno Turma", " ", "Cadastrar Aluno", "Cadastrar Professor", " ", "Criar Cronograma", "Ver Cronograma", " ", "Adicionar Feriado", "Adicionar Incidente" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -118,11 +118,11 @@ public class GUIAreaUsuario extends javax.swing.JFrame implements InternalFrameL
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jdpAreaUsuario)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -143,8 +143,7 @@ public class GUIAreaUsuario extends javax.swing.JFrame implements InternalFrameL
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -219,14 +218,52 @@ public class GUIAreaUsuario extends javax.swing.JFrame implements InternalFrameL
                                         gcpu.addInternalFrameListener(this);
                                     }
                                 }else{
-                                    if(jlOpcoes.getSelectedValue().equals("Cad Aluno Turma")){
-                                        
+                                    if(jlOpcoes.getSelectedValue().equals("Cad. Aluno Turma")){
+                                        if(!flagGUICadAlunoTurma){
+                                            GUICadAlunoTurma cat = new GUICadAlunoTurma();
+                                            jdpAreaUsuario.add(cat);
+                                            cat.setVisible(true);
+                                            flagGUICadAlunoTurma = true;
+                                            cat.addInternalFrameListener(this);
+                                        }
                                     }else{
                                         if(jlOpcoes.getSelectedValue().equals("Criar Cronograma")){
-                                            
+                                            if(!flagcadcron){
+                                                GUICadCron gcc = new GUICadCron();
+                                                jdpAreaUsuario.add(gcc);
+                                                gcc.setVisible(true);
+                                                flagcadcron = true;
+                                                gcc.addInternalFrameListener(this);
+                                            }
                                         }else{
                                             if(jlOpcoes.getSelectedValue().equals("Ver Cronograma")){
-                                                
+                                                if(!flagvercron){
+                                                    GUIVerCron gvc = new GUIVerCron();
+                                                    jdpAreaUsuario.add(gvc);
+                                                    gvc.setVisible(true);
+                                                    flagvercron = true;
+                                                    gvc.addInternalFrameListener(this);
+                                                }
+                                            }else{
+                                                if(jlOpcoes.getSelectedValue().equals("Adicionar Feriado")){
+                                                    if(!flagFeriado){
+                                                        GUIFeriados gfe = new GUIFeriados();
+                                                        jdpAreaUsuario.add(gfe);
+                                                        gfe.setVisible(true);
+                                                        flagFeriado = true;
+                                                        gfe.addInternalFrameListener(this);
+                                                    }
+                                                }else{
+                                                    if(jlOpcoes.getSelectedValue().equals("Adicionar Incidente")){
+                                                        if(!flagIncidente){
+                                                            GUIIncidente gin = new GUIIncidente();
+                                                            jdpAreaUsuario.add(gin);
+                                                            gin.setVisible(true);
+                                                            flagIncidente = true;
+                                                            gin.addInternalFrameListener(this);
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -326,6 +363,21 @@ public class GUIAreaUsuario extends javax.swing.JFrame implements InternalFrameL
         }
         if(e.getInternalFrame() instanceof GUICadProfUC){
             flagCadProfUc = false;
+        }
+        if(e.getInternalFrame() instanceof GUICadAlunoTurma){
+            flagGUICadAlunoTurma = false;
+        }
+        if(e.getInternalFrame() instanceof GUICadCron){
+            flagcadcron = false;
+        }
+        if(e.getInternalFrame() instanceof GUIVerCron){
+            flagvercron = false;
+        }
+        if(e.getInternalFrame() instanceof GUIFeriados){
+            flagFeriado = false;
+        }
+        if(e.getInternalFrame() instanceof GUIIncidente){
+            flagIncidente = false;
         }
     }
 

@@ -5,6 +5,31 @@ import java.sql.Date;
 public class ProfessorVO {
     private String nome, sobrenome, email, genero, cpf, grau_ins, etnia, 
             endereco, bairro, estado, cidade, estado_civil, celular, religiao, paimae;
+    private boolean manha = false, tarde = false, noite = false;
+
+    public boolean isManha() {
+        return manha;
+    }
+
+    public void setManha(boolean manha) {
+        this.manha = manha;
+    }
+
+    public boolean isTarde() {
+        return tarde;
+    }
+
+    public void setTarde(boolean tarde) {
+        this.tarde = tarde;
+    }
+
+    public boolean isNoite() {
+        return noite;
+    }
+
+    public void setNoite(boolean noite) {
+        this.noite = noite;
+    }
 
     public String getNome() {
         return nome;

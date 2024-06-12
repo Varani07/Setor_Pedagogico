@@ -58,4 +58,18 @@ public class LoopingVerification {
             return false;
         }
     }
+    public boolean loopingData(String nume){
+        int num = 8, numC = 0;
+        boolean numB = false;
+                
+        numC = 0;
+        for(int i = 0; i < nume.length(); i++){
+            if(nume.charAt(i) >= '0' && nume.charAt(i) <= '9'){
+                numC ++;
+            }
+        }
+        numB = numC == num;
+        
+        return numB;
+    }
 }

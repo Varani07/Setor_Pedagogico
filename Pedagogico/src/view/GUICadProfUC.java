@@ -164,13 +164,6 @@ public class GUICadProfUC extends javax.swing.JInternalFrame {
             ref = aus.refCurso(jcbCursos.getSelectedItem().toString());
         } catch (Exception e) {
         }
-        try {
-            ResultSet rs = aus.listaUc(ref);
-            while(rs.next()){
-                jcbUc.addItem(rs.getString("nome_uc"));
-            }
-        } catch (Exception e) {
-        }
     }
     
     private void fixUC (){
@@ -215,7 +208,7 @@ public class GUICadProfUC extends javax.swing.JInternalFrame {
             }
             
             try{
-                puvo.setId_uc(aus.refUc(jcbUc.getSelectedItem().toString()));
+                puvo.setId_uc(aus.refUc(jcbUc.getSelectedItem().toString(), aus.refCurso(jcbCursos.getSelectedItem().toString())));
             } catch (Exception e){
                 JOptionPane.showMessageDialog(null, e.getMessage());
             }
@@ -239,11 +232,19 @@ public class GUICadProfUC extends javax.swing.JInternalFrame {
         }
     }
     
+    private void restaurar(){
+        jcbProfessores.setSelectedIndex(0);
+        jcbCursos.setSelectedIndex(0);
+        limparcbUc();
+        fixUC();
+    }
+    
     private void jbtnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnInserirActionPerformed
         try {
             if(!excessoes()){
                 if(JOptionPane.showConfirmDialog(null, "Deseja cadastrar o professor(a) " + jcbProfessores.getSelectedItem().toString() + " a unidade curricular " + jcbUc.getSelectedItem().toString() + " do curso " + jcbCursos.getSelectedItem().toString() + "?", "AVISO!", JOptionPane.INFORMATION_MESSAGE) == JOptionPane.YES_OPTION){
                     cadprofuc();
+                    restaurar();
                 }
             }
         } catch (NullPointerException e) {
@@ -257,6 +258,7 @@ public class GUICadProfUC extends javax.swing.JInternalFrame {
                 if(!excessoes()){
                     if(JOptionPane.showConfirmDialog(null, "Deseja cadastrar o professor(a) " + jcbProfessores.getSelectedItem().toString() + " a unidade curricular " + jcbUc.getSelectedItem().toString() + " do curso " + jcbCursos.getSelectedItem().toString() + "?", "AVISO!", JOptionPane.INFORMATION_MESSAGE) == JOptionPane.YES_OPTION){
                         cadprofuc();
+                        restaurar();
                     }
                 }
             } catch (NullPointerException e) {

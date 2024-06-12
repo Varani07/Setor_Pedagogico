@@ -73,6 +73,10 @@ public class GUICadProf extends javax.swing.JInternalFrame {
         pjtfReligiao = new javax.swing.JTextField();
         jLabel85 = new javax.swing.JLabel();
         pjtfPaiMae = new javax.swing.JTextField();
+        jLabel86 = new javax.swing.JLabel();
+        jcbManha = new javax.swing.JCheckBox();
+        jcbTarde = new javax.swing.JCheckBox();
+        jcbNoite = new javax.swing.JCheckBox();
 
         setClosable(true);
         setIconifiable(true);
@@ -257,6 +261,18 @@ public class GUICadProf extends javax.swing.JInternalFrame {
 
         pjtfPaiMae.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
+        jLabel86.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel86.setText("TURNO");
+
+        jcbManha.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jcbManha.setText("Manhã");
+
+        jcbTarde.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jcbTarde.setText("Tarde");
+
+        jcbNoite.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jcbNoite.setText("Noite");
+
         jLayeredPane7.setLayer(jLabel69, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane7.setLayer(pjtfNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane7.setLayer(jLabel70, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -294,6 +310,10 @@ public class GUICadProf extends javax.swing.JInternalFrame {
         jLayeredPane7.setLayer(pjtfReligiao, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane7.setLayer(jLabel85, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane7.setLayer(pjtfPaiMae, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane7.setLayer(jLabel86, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane7.setLayer(jcbManha, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane7.setLayer(jcbTarde, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane7.setLayer(jcbNoite, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane7Layout = new javax.swing.GroupLayout(jLayeredPane7);
         jLayeredPane7.setLayout(jLayeredPane7Layout);
@@ -325,18 +345,6 @@ public class GUICadProf extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel79)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(pjtfNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jLayeredPane7Layout.createSequentialGroup()
-                                .addComponent(jLabel70)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(pjftfCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jLayeredPane7Layout.createSequentialGroup()
-                                .addComponent(jLabel71)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(pjtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jLayeredPane7Layout.createSequentialGroup()
-                                .addComponent(jLabel72)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(pjftfDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jLayeredPane7Layout.createSequentialGroup()
                                 .addComponent(jLabel73)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -380,7 +388,28 @@ public class GUICadProf extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(pjrbPersonalizado)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(pjtfPersonalizado, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(pjtfPersonalizado, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jLayeredPane7Layout.createSequentialGroup()
+                                .addGroup(jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jLayeredPane7Layout.createSequentialGroup()
+                                        .addComponent(jLabel70)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(pjftfCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(142, 142, 142)
+                                        .addComponent(jLabel86))
+                                    .addGroup(jLayeredPane7Layout.createSequentialGroup()
+                                        .addComponent(jLabel71)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(pjtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jLayeredPane7Layout.createSequentialGroup()
+                                        .addComponent(jLabel72)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(pjftfDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jcbNoite)
+                                    .addComponent(jcbTarde)
+                                    .addComponent(jcbManha))))
                         .addGap(0, 9, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -396,15 +425,20 @@ public class GUICadProf extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel70)
-                    .addComponent(pjftfCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pjftfCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel86)
+                    .addComponent(jcbManha))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel71)
-                    .addComponent(pjtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pjtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbTarde))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel72)
-                    .addComponent(pjftfDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jcbNoite)
+                    .addGroup(jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel72)
+                        .addComponent(pjftfDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel73)
@@ -554,6 +588,15 @@ public class GUICadProf extends javax.swing.JInternalFrame {
                                                                 pvo.setData_nasc(dts.convertDatatosql(data.parse(pjftfDataNasc.getText())));
                                                             } catch (Exception e) {
                                                             }
+                                                            if(jcbManha.isSelected()){
+                                                                pvo.setManha(true);
+                                                            }
+                                                            if(jcbTarde.isSelected()){
+                                                                pvo.setTarde(true);
+                                                            }
+                                                            if(jcbNoite.isSelected()){
+                                                                pvo.setNoite(true);
+                                                            }
                                                             AreaUService aus = services.ServiceFactory.getAreaUService();
                                                             try {
                                                                 aus.cadastrarProfessor(pvo);
@@ -653,56 +696,7 @@ public class GUICadProf extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel49;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel50;
-    private javax.swing.JLabel jLabel51;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel69;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel70;
     private javax.swing.JLabel jLabel71;
     private javax.swing.JLabel jLabel72;
@@ -713,84 +707,20 @@ public class GUICadProf extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel77;
     private javax.swing.JLabel jLabel78;
     private javax.swing.JLabel jLabel79;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel80;
     private javax.swing.JLabel jLabel81;
     private javax.swing.JLabel jLabel82;
     private javax.swing.JLabel jLabel83;
     private javax.swing.JLabel jLabel84;
     private javax.swing.JLabel jLabel85;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JLayeredPane jLayeredPane2;
+    private javax.swing.JLabel jLabel86;
     private javax.swing.JLayeredPane jLayeredPane3;
-    private javax.swing.JLayeredPane jLayeredPane4;
-    private javax.swing.JLayeredPane jLayeredPane5;
     private javax.swing.JLayeredPane jLayeredPane7;
     private javax.swing.ButtonGroup jbgGenero;
-    private javax.swing.JButton jbtnCadastrar;
     private javax.swing.JButton jbtnCadastrar1;
-    private javax.swing.JComboBox<String> jcbEstado;
-    private javax.swing.JComboBox<String> jcbEstado1;
-    private javax.swing.JComboBox<String> jcbEstado2;
-    private javax.swing.JComboBox<String> jcbEstadoCivil;
-    private javax.swing.JComboBox<String> jcbEstadoCivil1;
-    private javax.swing.JComboBox<String> jcbEstadoCivil2;
-    private javax.swing.JComboBox<String> jcbEtnia;
-    private javax.swing.JComboBox<String> jcbEtnia1;
-    private javax.swing.JComboBox<String> jcbEtnia2;
-    private javax.swing.JComboBox<String> jcbGrauIns;
-    private javax.swing.JComboBox<String> jcbGrauIns1;
-    private javax.swing.JComboBox<String> jcbGrauIns2;
-    private javax.swing.JFormattedTextField jftfCelular;
-    private javax.swing.JFormattedTextField jftfCelular1;
-    private javax.swing.JFormattedTextField jftfCelular2;
-    private javax.swing.JFormattedTextField jftfCpf;
-    private javax.swing.JFormattedTextField jftfCpf1;
-    private javax.swing.JFormattedTextField jftfCpf2;
-    private javax.swing.JFormattedTextField jftfDataNasc;
-    private javax.swing.JFormattedTextField jftfDataNasc1;
-    private javax.swing.JFormattedTextField jftfDataNasc2;
-    private javax.swing.JLabel jlErro;
-    private javax.swing.JRadioButton jrbFeminino;
-    private javax.swing.JRadioButton jrbFeminino1;
-    private javax.swing.JRadioButton jrbFeminino2;
-    private javax.swing.JRadioButton jrbMasculino;
-    private javax.swing.JRadioButton jrbMasculino1;
-    private javax.swing.JRadioButton jrbMasculino2;
-    private javax.swing.JRadioButton jrbPersonalizado;
-    private javax.swing.JRadioButton jrbPersonalizado1;
-    private javax.swing.JRadioButton jrbPersonalizado2;
-    private javax.swing.JTextField jtfBairro;
-    private javax.swing.JTextField jtfBairro1;
-    private javax.swing.JTextField jtfBairro2;
-    private javax.swing.JTextField jtfCidade;
-    private javax.swing.JTextField jtfCidade1;
-    private javax.swing.JTextField jtfCidade2;
-    private javax.swing.JTextField jtfEmail;
-    private javax.swing.JTextField jtfEmail1;
-    private javax.swing.JTextField jtfEmail2;
-    private javax.swing.JTextField jtfEndereco;
-    private javax.swing.JTextField jtfEndereco1;
-    private javax.swing.JTextField jtfEndereco2;
-    private javax.swing.JTextField jtfNome;
-    private javax.swing.JTextField jtfNome1;
-    private javax.swing.JTextField jtfNome2;
-    private javax.swing.JTextField jtfNumero;
-    private javax.swing.JTextField jtfNumero1;
-    private javax.swing.JTextField jtfNumero2;
-    private javax.swing.JTextField jtfPaiMae;
-    private javax.swing.JTextField jtfPaiMae1;
-    private javax.swing.JTextField jtfPaiMae2;
-    private javax.swing.JTextField jtfPersonalizado;
-    private javax.swing.JTextField jtfPersonalizado1;
-    private javax.swing.JTextField jtfPersonalizado2;
-    private javax.swing.JTextField jtfReligiao;
-    private javax.swing.JTextField jtfReligiao1;
-    private javax.swing.JTextField jtfReligiao2;
-    private javax.swing.JTextField jtfSobrenome;
-    private javax.swing.JTextField jtfSobrenome1;
-    private javax.swing.JTextField jtfSobrenome2;
+    private javax.swing.JCheckBox jcbManha;
+    private javax.swing.JCheckBox jcbNoite;
+    private javax.swing.JCheckBox jcbTarde;
     private javax.swing.JComboBox<String> pjcbEstado;
     private javax.swing.JComboBox<String> pjcbEstadoCivil;
     private javax.swing.JComboBox<String> pjcbEtnia;

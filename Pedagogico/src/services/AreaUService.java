@@ -73,10 +73,34 @@ public class AreaUService {
     public int getProfId(String cpf) throws SQLException{
         return audao.getProfId(cpf);
     }
-    public int refUc (String nome) throws SQLException{
-        return audao.refUc(nome);
+    public int refUc (String nome, int curso) throws SQLException{
+        return audao.refUc(nome, curso);
     }
     public void cadProfUc(ProfUcVO puvo) throws SQLException {
         audao.cadProfUc(puvo);
+    }
+    public ResultSet listaAlunos (){
+        return audao.listaAlunos();
+    }
+    public String getCurso(int ref)  throws SQLException {
+        return audao.getCurso(ref);
+    }
+    public ResultSet getTurma(int ref){
+        return audao.getTurma(ref);
+    }
+    public int getCursoA (int aluno) throws SQLException{
+        return audao.getCursoA(aluno);
+    }
+    public void cadTurmaA (int turma, int id) throws SQLException{
+        audao.cadTurmaA(turma, id);
+    }
+    public int getTurmaId (String turma) throws SQLException{
+        return audao.getTurmaId(turma);
+    }
+    public ResultSet listaUcM (int mod){
+        return audao.listaUcM(mod);
+    }
+    public String getTurmaTurno (String turma) throws SQLException{
+        return audao.getTurmaTurno(turma);
     }
 }

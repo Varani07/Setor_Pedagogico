@@ -3,9 +3,17 @@ package model;
 import java.sql.Date;
 
 public class TurmaVO {
-    private boolean m1 = false, m2 = false, m3 = false, m4 = false;
+    private boolean m1 = false, m2 = false, m3 = false, m4 = false, status = true;
     private String nome_turma, turno, ano_turma;
     private int id_turma, curso;
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 
     public int getCurso() {
         return curso;

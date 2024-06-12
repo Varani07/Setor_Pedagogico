@@ -153,7 +153,7 @@ public class AreaUDAO {
     public void cadTurma (TurmaVO tvo) throws SQLException{
         Connection con = new ConexaoBanco().novaConexao();
         try {
-            String sql = "INSERT INTO turmas VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?);";
+            String sql = "INSERT INTO turmas VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement pstm = con.prepareStatement(sql);
             
             pstm.setString(1, tvo.getNome_turma());
@@ -164,6 +164,7 @@ public class AreaUDAO {
             pstm.setBoolean(6, tvo.isM3());
             pstm.setBoolean(7, tvo.isM4());
             pstm.setInt(8, tvo.getCurso());
+            pstm.setBoolean(9, tvo.isStatus());
             
             pstm.execute();
             pstm.close();
@@ -294,7 +295,7 @@ public class AreaUDAO {
     public void cadastrarProfessor(ProfessorVO pvo) throws SQLException{
         Connection con = new ConexaoBanco().novaConexao();
         try {
-            String sql = "INSERT INTO professores VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            String sql = "INSERT INTO professores VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement pstm = con.prepareStatement(sql);
             
             pstm.setString(1, pvo.getNome());
@@ -314,6 +315,9 @@ public class AreaUDAO {
             pstm.setString(15, pvo.getCelular());
             pstm.setInt(16, pvo.getNum());
             pstm.setDate(17, pvo.getData_nasc());
+            pstm.setBoolean(18, pvo.isManha());
+            pstm.setBoolean(19, pvo.isTarde());
+            pstm.setBoolean(20, pvo.isNoite());
             
             pstm.execute();
             pstm.close();
@@ -363,10 +367,10 @@ public class AreaUDAO {
             con.close();
         }
     }
-    public int refUc (String nome) throws SQLException{
+    public int refUc (String nome, int curso) throws SQLException{
         Connection con = new ConexaoBanco().novaConexao();
         try {
-            String sql = "SELECT id_uc FROM unidades_curriculares WHERE nome_uc = '" + nome + "';";
+            String sql = "SELECT id_uc FROM unidades_curriculares WHERE nome_uc = '" + nome + "' AND curso = " + curso + ";";
             PreparedStatement pstm = con.prepareStatement(sql);
             int ref = 0;
             ResultSet rs = pstm.executeQuery();
@@ -388,6 +392,124 @@ public class AreaUDAO {
             PreparedStatement pstm = con.prepareStatement(sql);
             pstm.execute();
             pstm.close();
+        } catch (SQLException e) {
+            throw new SQLException(e.getMessage());
+        } finally {
+            con.close();
+        }
+    }
+    public ResultSet listaAlunos (){
+        Connection con = new ConexaoBanco().novaConexao();
+        try {
+            String sql = "SELECT id_aluno, nome, sobrenome, matricula, curso FROM alunos;";
+            PreparedStatement pstm = con.prepareStatement(sql);
+            return pstm.executeQuery();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            return null;
+        }
+    }
+    public String getCurso(int ref) throws SQLException{
+        Connection con = new ConexaoBanco().novaConexao();
+        try {
+            String sql = "SELECT nome_curso FROM cursos WHERE id_curso = " + ref + ";";
+            PreparedStatement pstm = con.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+            String curso = "";
+            while(rs.next()){
+                curso = rs.getString("nome_curso");
+            }
+            con.close();
+            return curso;
+        } catch (SQLException e) {
+            throw new SQLException(e.getMessage());
+        } finally {
+            con.close();
+        }
+    }
+    public ResultSet getTurma(int ref){
+        Connection con = new ConexaoBanco().novaConexao();
+        try {
+            String sql = "SELECT nome_turma, ano, turno FROM turmas WHERE status = 1 AND curso = " + ref + ";";
+            PreparedStatement pstm = con.prepareStatement(sql);
+            return pstm.executeQuery();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            return null;
+        } 
+    }
+    public int getCursoA (int aluno) throws SQLException{
+        Connection con = new ConexaoBanco().novaConexao();
+        try {
+            String sql = "SELECT curso FROM alunos WHERE id_aluno = " + aluno + ";";
+            PreparedStatement pstm = con.prepareStatement(sql);
+            int ref = 0;
+            ResultSet rs = pstm.executeQuery();
+            while(rs.next()){
+                ref = rs.getInt("curso");
+            }
+            con.close();
+            return ref;
+        } catch (SQLException e) {
+            throw new SQLException(e.getMessage());
+        } finally {
+            con.close();
+        }
+    }
+    public void cadTurmaA (int turma, int id) throws SQLException{
+        Connection con = new ConexaoBanco().novaConexao();
+        try {
+            String sql = "UPDATE alunos SET turma = " + turma + " WHERE id_aluno = " + id + ";";
+            PreparedStatement pstm = con.prepareStatement(sql);
+            pstm.executeUpdate();
+            pstm.close();
+        } catch (SQLException e) {
+            throw new SQLException(e.getMessage());
+        } finally {
+            con.close();
+        }
+    }
+    public int getTurmaId (String turma) throws SQLException{
+        Connection con = new ConexaoBanco().novaConexao();
+        try {
+            String sql = "SELECT id_turma FROM turmas WHERE nome_turma = '" + turma + "';";
+            PreparedStatement pstm = con.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+            int ref = 0;
+            while(rs.next()){
+                ref = rs.getInt("id_turma");
+            }
+            pstm.close();
+            return ref;
+        } catch (SQLException e) {
+            throw new SQLException(e.getMessage());
+        } finally {
+            con.close();
+        }
+    }
+    public ResultSet listaUcM (int mod){
+        Connection con = new ConexaoBanco().novaConexao();
+        try {
+            String sql = "SELECT nome_uc, cargaHoraria FROM unidades_curriculares WHERE modulo = " + mod + ";";
+            PreparedStatement pstm = con.prepareStatement(sql);
+            return pstm.executeQuery();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            return null;
+        }
+    }
+    public String getTurmaTurno (String turma) throws SQLException{
+        Connection con = new ConexaoBanco().novaConexao();
+        try {
+            String sql = "SELECT turno FROM turmas WHERE nome_turma = '" + turma + "';";
+            PreparedStatement pstm = con.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+            String ref = "";
+            while(rs.next()){
+                ref = rs.getString("turno");
+            }
+            pstm.close();
+            return ref;
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         } finally {
