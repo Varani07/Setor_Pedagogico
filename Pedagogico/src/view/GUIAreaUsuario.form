@@ -151,7 +151,7 @@
                   <Font name="Arial" size="12" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                  <StringArray count="17">
+                  <StringArray count="19">
                     <StringItem index="0" value="Cadastrar Curso"/>
                     <StringItem index="1" value="Cadastrar Modulo"/>
                     <StringItem index="2" value=" "/>
@@ -167,8 +167,10 @@
                     <StringItem index="12" value="Criar Cronograma"/>
                     <StringItem index="13" value="Ver Cronograma"/>
                     <StringItem index="14" value=" "/>
-                    <StringItem index="15" value="Adicionar Feriado"/>
-                    <StringItem index="16" value="Adicionar Incidente"/>
+                    <StringItem index="15" value="Ver/Alterar"/>
+                    <StringItem index="16" value=" "/>
+                    <StringItem index="17" value="Adicionar Feriado"/>
+                    <StringItem index="18" value="Adicionar Incidente"/>
                   </StringArray>
                 </Property>
               </Properties>

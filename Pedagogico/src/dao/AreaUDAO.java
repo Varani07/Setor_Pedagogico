@@ -516,4 +516,40 @@ public class AreaUDAO {
             con.close();
         }
     }
+    public ResultSet getTurmas(){
+        Connection con = new ConexaoBanco().novaConexao();
+        try {
+            String sql = "SELECT nome_turma FROM turmas;";
+            PreparedStatement pstm = con.prepareStatement(sql);
+            return pstm.executeQuery();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            return null;
+        } 
+    }
+    public ResultSet preencher_VerInfo(String param, String tab, String where){
+        Connection con = new ConexaoBanco().novaConexao();
+        try {
+            String sql = "SELECT " + param + " FROM " + tab + "" + where;
+            PreparedStatement pstm = con.prepareStatement(sql);
+            return pstm.executeQuery();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            return null;
+        }
+    }
+    public void infoUpdate(String param, String tab, String where, String def) throws SQLException{
+        Connection con = new ConexaoBanco().novaConexao();
+        try {
+            String sql = "UPDATE " + param + " SET " + tab + " = '" + def + "' WHERE cpf = '" + where + "';";
+            PreparedStatement pstm = con.prepareStatement(sql);
+            
+            pstm.executeUpdate();
+            pstm.close();
+        } catch (SQLException e) {
+            throw new SQLException(e.getMessage());
+        } finally {
+            con.close();
+        }
+    }
 }

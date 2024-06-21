@@ -22,10 +22,12 @@ Na área do usuário pode ser feito o cadastro de Cursos, Módulos, Unidades Cur
 
 O Cronograma é moldado a partir da carga horária de cada unidade currícular presente em cada módulo, pulando feriados e fins de semana.
 
+Agora a atualização dos dados cadastrais pode ser realizada pela area do usuario em Ver/Alterar, ainda a espaço para melhorias, apenas alguns dados podem ser atualizados.
+
 Ferramentas ainda não implementadas: 
 - Adição de feriado após a criação de um cronograma. (em progresso)
 - Adição de incidentes.
 - Finalizar turma após chegada a data final.
-- Alterar informações de cadastro do professor e aluno.
+- Alterar informações de cadastro do professor e aluno. (MELHORAR)
 - Usuário conseguir alterar sua senha.
 

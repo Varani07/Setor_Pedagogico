@@ -103,4 +103,13 @@ public class AreaUService {
     public String getTurmaTurno (String turma) throws SQLException{
         return audao.getTurmaTurno(turma);
     }
+    public ResultSet getTurmas() {
+        return audao.getTurmas();
+    }
+    public ResultSet preencher_VerInfo(String param, String tab, String where){
+        return audao.preencher_VerInfo(param, tab, where);
+    }
+    public void infoUpdate(String param, String tab, String where, String def) throws SQLException{
+        audao.infoUpdate(param, tab, where, def);
+    }
 }

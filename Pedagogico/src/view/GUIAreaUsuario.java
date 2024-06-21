@@ -7,7 +7,7 @@ public class GUIAreaUsuario extends javax.swing.JFrame implements InternalFrameL
     public static String user;
     private boolean flagCadCurso = false, flagCadMod = false, flagCadUc = false, flagCadTurma = false,
             flagCadAluno = false, flagCadProf = false, flagCadProfUc = false, flagGUICadAlunoTurma = false,
-            flagcadcron = false, flagvercron = false, flagFeriado = false, flagIncidente = false;
+            flagcadcron = false, flagvercron = false, flagFeriado = false, flagIncidente = false, flagAlt = false;
 
     public GUIAreaUsuario() {
         initComponents();
@@ -70,7 +70,7 @@ public class GUIAreaUsuario extends javax.swing.JFrame implements InternalFrameL
         jlOpcoes.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jlOpcoes.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jlOpcoes.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Cadastrar Curso", "Cadastrar Modulo", " ", "Cadastrar UC", "Cad. Prof. UC", " ", "Cadastrar Turma", "Cad. Aluno Turma", " ", "Cadastrar Aluno", "Cadastrar Professor", " ", "Criar Cronograma", "Ver Cronograma", " ", "Adicionar Feriado", "Adicionar Incidente" };
+            String[] strings = { "Cadastrar Curso", "Cadastrar Modulo", " ", "Cadastrar UC", "Cad. Prof. UC", " ", "Cadastrar Turma", "Cad. Aluno Turma", " ", "Cadastrar Aluno", "Cadastrar Professor", " ", "Criar Cronograma", "Ver Cronograma", " ", "Ver/Alterar", " ", "Adicionar Feriado", "Adicionar Incidente" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -262,6 +262,16 @@ public class GUIAreaUsuario extends javax.swing.JFrame implements InternalFrameL
                                                             flagIncidente = true;
                                                             gin.addInternalFrameListener(this);
                                                         }
+                                                    }else{
+                                                        if(jlOpcoes.getSelectedValue().equals("Ver/Alterar")){
+                                                            if(!flagAlt){
+                                                                GUIVerAlterar gva = new GUIVerAlterar();
+                                                                jdpAreaUsuario.add(gva);
+                                                                gva.setVisible(true);
+                                                                flagAlt = true;
+                                                                gva.addInternalFrameListener(this);
+                                                            }
+                                                        }
                                                     }
                                                 }
                                             }
@@ -378,6 +388,9 @@ public class GUIAreaUsuario extends javax.swing.JFrame implements InternalFrameL
         }
         if(e.getInternalFrame() instanceof GUIIncidente){
             flagIncidente = false;
+        }
+        if(e.getInternalFrame() instanceof GUIVerAlterar){
+            flagAlt = false;
         }
     }
 

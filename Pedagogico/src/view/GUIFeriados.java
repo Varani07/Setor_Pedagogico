@@ -37,7 +37,6 @@ public class GUIFeriados extends javax.swing.JInternalFrame {
         jtfNome = new javax.swing.JTextField();
         jcbDia = new javax.swing.JComboBox<>();
         jcbMes = new javax.swing.JComboBox<>();
-        jbtnTeste = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Adicionar Feriado");
@@ -70,13 +69,6 @@ public class GUIFeriados extends javax.swing.JInternalFrame {
             }
         });
 
-        jbtnTeste.setText("jButton1");
-        jbtnTeste.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnTesteActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -102,9 +94,7 @@ public class GUIFeriados extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jcbMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbtnTeste)
-                                .addGap(31, 31, 31)))))
+                                .addGap(31, 196, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -121,9 +111,8 @@ public class GUIFeriados extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jcbMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtnTeste))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                    .addComponent(jcbMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(jbtnFeriado)
                 .addContainerGap())
         );
@@ -165,34 +154,11 @@ public class GUIFeriados extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jbtnFeriadoActionPerformed
 
-    private void jbtnTesteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnTesteActionPerformed
-        teste();
-    }//GEN-LAST:event_jbtnTesteActionPerformed
-
     
     private void preencherData(){
         for (int i = 1; i <= 12; i++){
             String meses = Integer.toString(i);
             jcbMes.addItem(meses);
-        }
-    }
-    
-    private void teste (){
-        CronogramaService cs = services.ServiceFactory.getCronogramaService();
-        try {
-            int owo = 11, t = 0;
-            
-            while(t == 0){
-                ResultSet rs = cs.ver_feriado2(owo);
-                while(rs.next()){
-                    JOptionPane.showMessageDialog(null, "Data de início: " + rs.getString("data_inicio") + " / Data final: " + rs.getString("data_fim") + " / Turno: " + rs.getString("turno") + " / ID Prof.: " + rs.getInt("id_professor"));
-                }
-                t = Integer.parseInt(JOptionPane.showInputDialog("Deseja continuar? [Sim = 0 / Não = 1]"));
-                if(t == 0){
-                    owo = Integer.parseInt(JOptionPane.showInputDialog("Qual o id do próximo cronograma que gostaria de ver? [8, 9, 10, 11, 12, 15, 16, 17, 18]"));
-                }
-            }
-        } catch (Exception e) {
         }
     }
     
@@ -275,10 +241,10 @@ public class GUIFeriados extends javax.swing.JInternalFrame {
                     if(dv.testDataIncompativel(data_Cronograma, dataF_Cronograma, data_feriado, data_feriado)){
                         int ref_c = rs.getInt("id_cronograma");
                         int carga_h = 0;
-                        boolean vai = true;
                         //REPETINDO PROCESSO DE CADASTRO DA DATA INICIAL
                         ResultSet r = cs.ver_feriado2(ref_c);
                         while(r.next()){
+                            boolean vai = true;
                             String data_Uc = dv.DateSQLtoUtil(r.getDate("data_inicio")), dataF_Uc = dv.DateSQLtoUtil(r.getDate("data_fim"));
                             //agora vamos ver qual das datas em data_prof coincide com o feriado
                             if(dv.testDataIncompativel(data_Uc, dataF_Uc, data_feriado, data_feriado)){
@@ -295,17 +261,58 @@ public class GUIFeriados extends javax.swing.JInternalFrame {
                                     if(!vai){
                                         cs.setar_Data_Inicio_Cronograma(dts.convertDatatosql(f.parse(data_Uc)), ref_c);
                                     }
+                                    cs.setar_Data_Fim_Cronograma(dts.convertDatatosql(f.parse(dataF_Uc)), ref_c);
                                     //fazer com que verifique se a data alterada vai impactar o professor, isso também tem que verificar se a data que foi alterada vai impactar
-                                    int id_Cron = ref_c, id_Uc = r.getInt("id"), contador = 0;
+                                    int id_Cron = ref_c, id_Uc = r.getInt("id"), contador = 0, cahT = 0;
                                     String data_D = data_Uc, dataF_D = dataF_Uc;
                                     do{
                                         contador = 0;
+                                        cahT = 0;
                                         ResultSet s = cs.ajeitar_Novas_Datas(id_Cron, id_Uc);
                                         while(s.next()){
                                             String data_T = dv.DateSQLtoUtil(s.getDate("data_inicio"));
                                             String dataF_T = dv.DateSQLtoUtil(s.getDate("data_fim"));
                                             if(dv.testDataIncompativel(data_T, dataF_T, data_D, dataF_D)){
+                                                contador = contador + 1;
+                                                id_Uc = s.getInt("id");
+                                                cahT = cs.pegar_ch(s.getInt("id_uc"));
+                                                data_D = dv.calcularDataUc(dataF_D, 6);
+                                                dataF_D = dv.calcularDataUc(data_D, cahT);
+                                                cs.setar_Novas_Datas(dts.convertDatatosql(f.parse(data_D)), dts.convertDatatosql(f.parse(dataF_D)), id_Uc);
+                                                cs.setar_Data_Fim_Cronograma(dts.convertDatatosql(f.parse(dataF_D)), id_Cron);
                                                 
+                                                //verifiquei se existe alguma outra data nesse cronograma que precisa de alteração, se sim, agora vamos criar um looping para alterar a data dos professores que coincidir com essa que acabos de alterar
+                                                
+                                                int contador2 = 0, id_Prof = s.getInt("id_professor"), id_Uc2 = id_Uc, cahP = 0, id_cronP = 0;
+                                                String turno = s.getString("turno"), data_T1 = data_D, dataF_T1 = dataF_D;
+                                                do{
+                                                    ResultSet p = cs.ad(turno, id_Prof, id_Uc2);
+                                                    while(p.next()){
+                                                        String data_P = dv.DateSQLtoUtil(p.getDate("data_inicio"));
+                                                        String dataF_P = dv.DateSQLtoUtil(p.getDate("data_fim"));
+                                                        cahP = 0;
+                                                        id_cronP = p.getInt("id_cronograma");
+                                                        if(dv.testDataIncompativel(data_T1, dataF_T1, data_P, dataF_P)){
+                                                            ResultSet p_cron = cs.get_Cronograma_Info(id_cronP);
+                                                            while(p_cron.next()){
+                                                                boolean data_inicio_cron = true;
+                                                                if(data_P.equals(dv.DateSQLtoUtil(p_cron.getDate("data_inicio")))){
+                                                                    data_inicio_cron = false;
+                                                                }
+                                                                contador2 = contador2 + 1;
+                                                                id_Uc2 = p.getInt("id");
+                                                                cahP = cs.pegar_ch(p.getInt("id_uc"));
+                                                                data_T1 = dv.calcularDataUc(dataF_T1, 6);
+                                                                dataF_T1 = dv.calcularDataUc(data_T1, cahP);
+                                                                cs.setar_Novas_Datas(dts.convertDatatosql(f.parse(data_T1)), dts.convertDatatosql(f.parse(dataF_T1)), id_Uc2);
+                                                                if(!data_inicio_cron){
+                                                                    cs.setar_Data_Inicio_Cronograma(dts.convertDatatosql(f.parse(data_T1)), id_cronP);
+                                                                }
+                                                                cs.setar_Data_Fim_Cronograma(dts.convertDatatosql(f.parse(dataF_T1)), id_cronP);
+                                                            }
+                                                        }
+                                                    }
+                                                }while(contador2 != 0);
                                             }
                                         }
                                     }while(contador != 0);
@@ -454,7 +461,6 @@ public class GUIFeriados extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbtnFeriado;
-    private javax.swing.JButton jbtnTeste;
     private javax.swing.JComboBox<String> jcbDia;
     private javax.swing.JComboBox<String> jcbMes;
     private javax.swing.JTextField jtfNome;
